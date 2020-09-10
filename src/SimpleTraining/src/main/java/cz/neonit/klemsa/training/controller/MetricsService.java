@@ -1,14 +1,14 @@
-package cz.neonit.klemsa.training.api;
+package cz.neonit.klemsa.training.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Kpis {
+public class MetricsService {
 
-    @GetMapping("/kips")
-    public void kips(@RequestParam(value = "date", defaultValue = "") String date) {
+    @GetMapping("/metrics")
+    public void metrics(@RequestParam(value = "date", defaultValue = "") String date) {
         return;
     }
 }
