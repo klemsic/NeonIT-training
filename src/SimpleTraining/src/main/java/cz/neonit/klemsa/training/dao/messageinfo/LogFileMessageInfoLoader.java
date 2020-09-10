@@ -1,22 +1,23 @@
 package cz.neonit.klemsa.training.dao.messageinfo;
 
 import cz.neonit.klemsa.training.Application;
+import cz.neonit.klemsa.training.domain.message.CommunicationInfo;
 import cz.neonit.klemsa.training.domain.message.MessageInfo;
 
-import java.io.File;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 /**
  * @author tomasklemsa
  */
 public final class LogFileMessageInfoLoader implements MessageInfoLoader {
     private static final String FILE_NAME_PATTERN = "MCP_{0}.json";
-    private static final String DATE_FORMAT_PATTERN = "yyyyMMdd";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
     private final String logUrl;
 
     /**
@@ -33,17 +34,25 @@ public final class LogFileMessageInfoLoader implements MessageInfoLoader {
      * @return
      */
     @Override
-    public List<MessageInfo> getMessagesInfo(LocalDate date) {
-        List<MessageInfo> result = new ArrayList<>();
-        String fileName = "";
+    public List<CommunicationInfo> getMessagesInfo(Date date) {
+        Objects.requireNonNull(date);
+        List<CommunicationInfo> result = new ArrayList<>();
+        String fileName = FILE_NAME_PATTERN.replace("{0}",DATE_FORMAT.format(date));
 
         Path path = Paths.get(logUrl,fileName);
         File file = path.toFile();
 
+        try (FileReader fileReader = new FileReader(file)) {
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
 
+            while ((line = bufferedReader.readLine()) != null) {
+                result.add(CommunicationInfoBuilder.buildFromJson(line));
+            }
 
-
-
+        } catch(IOException e) {
+            // Do nothing and return empty List.
+        }
 
         return result;
     }

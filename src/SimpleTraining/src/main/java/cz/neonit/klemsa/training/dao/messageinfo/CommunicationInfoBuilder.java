@@ -1,17 +1,21 @@
-package cz.neonit.klemsa.training.domain.message;
+package cz.neonit.klemsa.training.dao.messageinfo;
 
+import cz.neonit.klemsa.training.domain.message.*;
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * @author tomasklemsa
+ */
 public class CommunicationInfoBuilder {
     /**
-     *
-     * @param json
-     * @return
+     * Creates new instance from json.
+     * @param json witch represents CommunicationInfo object.
+     * @return new instance of CommunicationInfo or null if json is invalid.
      */
-    public CommunicationInfo buildFromJson(String json) {
+    public static CommunicationInfo buildFromJson(String json) {
         JSONParser parser = new JSONParser();
         CommunicationInfo communicationInfo = null;
 
@@ -53,5 +57,4 @@ public class CommunicationInfoBuilder {
         }
         return communicationInfo;
     }
-
 }

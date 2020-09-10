@@ -1,8 +1,9 @@
 package cz.neonit.klemsa.training.dao.messageinfo;
 
-import cz.neonit.klemsa.training.domain.message.MessageInfo;
+import cz.neonit.klemsa.training.domain.message.CommunicationInfo;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface MessageInfoLoader {
      * @param date in witch you search for message info.
      * @return List of message info witch available in current date.
      */
-    List<MessageInfo> getMessagesInfo(LocalDate date);
+    List<CommunicationInfo> getMessagesInfo(Date date);
 
     /**
      * Gets all dates on witch message info are available for current data source.
