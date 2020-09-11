@@ -76,4 +76,28 @@ public class MSISDN {
     public int getSn() {
         return sn;
     }
+
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MSISDN msisdn = (MSISDN) o;
+        return cc == msisdn.cc &&
+                ndc == msisdn.ndc &&
+                sn == msisdn.sn;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(cc, ndc, sn);
+    }
 }

@@ -1,4 +1,4 @@
-package cz.neonit.klemsa.training.dao.messageinfo;
+package cz.neonit.klemsa.training.dao.communication;
 
 import cz.neonit.klemsa.training.Application;
 import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;

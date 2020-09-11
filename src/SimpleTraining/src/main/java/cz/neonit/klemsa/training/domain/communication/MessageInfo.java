@@ -1,6 +1,8 @@
-package cz.neonit.klemsa.training.domain.message;
+package cz.neonit.klemsa.training.domain.communication;
 
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;
+
+import java.util.Objects;
 
 /**
  * @author tomasklemsa
@@ -39,5 +41,30 @@ public final class MessageInfo extends CommunicationInfo {
      */
     public MessageStatus getMessageStatus() {
         return messageStatus;
+    }
+
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        MessageInfo messageInfo = (MessageInfo) o;
+        return Objects.equals(messageContent, messageInfo.messageContent) &&
+                messageStatus == messageInfo.messageStatus &&
+                super.equals((CommunicationInfo) messageInfo);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), messageContent, messageStatus);
     }
 }

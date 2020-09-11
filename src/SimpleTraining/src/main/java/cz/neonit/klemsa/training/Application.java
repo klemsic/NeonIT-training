@@ -1,6 +1,5 @@
 package cz.neonit.klemsa.training;
 
-import cz.neonit.klemsa.training.dao.messageinfo.LogFileMessageInfoLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

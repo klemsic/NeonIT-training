@@ -1,6 +1,8 @@
-package cz.neonit.klemsa.training.domain.message;
+package cz.neonit.klemsa.training.domain.communication;
 
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;
+
+import java.util.Objects;
 
 /**
  * @author tomasklemsa
@@ -55,5 +57,30 @@ public abstract class CommunicationInfo {
      */
     public MSISDN getDestination() {
         return destination;
+    }
+
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommunicationInfo that = (CommunicationInfo) o;
+        return messageType == that.messageType &&
+                Objects.equals(timestamp, that.timestamp) &&
+                Objects.equals(origin, that.origin) &&
+                Objects.equals(destination, that.destination);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(messageType, timestamp, origin, destination);
     }
 }
