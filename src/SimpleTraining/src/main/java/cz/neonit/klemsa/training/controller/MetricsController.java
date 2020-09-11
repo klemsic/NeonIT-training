@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MetricsService {
+public class MetricsController {
 
     @GetMapping("/metrics")
     public void metrics(@RequestParam(value = "date", defaultValue = "") String date) {

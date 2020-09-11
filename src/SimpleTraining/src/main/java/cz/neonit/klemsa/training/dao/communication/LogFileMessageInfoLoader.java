@@ -1,15 +1,12 @@
 package cz.neonit.klemsa.training.dao.messageinfo;
 
 import cz.neonit.klemsa.training.Application;
-import cz.neonit.klemsa.training.domain.message.CommunicationInfo;
-import cz.neonit.klemsa.training.domain.message.MessageInfo;
+import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -56,15 +53,4 @@ public final class LogFileMessageInfoLoader implements MessageInfoLoader {
 
         return result;
     }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public List<LocalDate> getDates() {
-        return null;
-    }
-
-
 }

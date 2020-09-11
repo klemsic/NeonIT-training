@@ -1,6 +1,6 @@
 package cz.neonit.klemsa.training.dao.messageinfo;
 
-import cz.neonit.klemsa.training.domain.message.*;
+import cz.neonit.klemsa.training.domain.communication.*;
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
  * @author tomasklemsa
  */
 public class CommunicationInfoBuilder {
+
     /**
      * Creates new instance from json.
      * @param json witch represents CommunicationInfo object.
