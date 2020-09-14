@@ -48,21 +48,21 @@ public class CommunicationInfoBuilder {
         // If timestamp cannot be determined, continue.
         try {
             timestamp = Long.valueOf(jsonObject.get("timestamp").toString());
-        } catch (ClassCastException | NullPointerException e) {
+        } catch (ClassCastException | NullPointerException | NumberFormatException e) {
             timestamp = null;
         }
 
         // If origin cannot be determined, continue.
         try {
             origin = MSISDN.valueOf(jsonObject.get("origin").toString());
-        } catch (ClassCastException | NullPointerException e) {
+        } catch (ClassCastException | NullPointerException | NumberFormatException e) {
             origin = null;
         }
 
         // If destination cannot be determined, continue.
         try {
             destination = MSISDN.valueOf(jsonObject.get("destination").toString());
-        } catch (ClassCastException | NullPointerException e) {
+        } catch (ClassCastException | NullPointerException | NumberFormatException e) {
             destination = null;
         }
 
@@ -79,7 +79,7 @@ public class CommunicationInfoBuilder {
                 // If message status cannot be determined, continue.
                 try {
                     messageStatus = MessageStatus.valueOf(jsonObject.get("message_status").toString());
-                } catch (ClassCastException | NullPointerException e) {
+                } catch (ClassCastException | NullPointerException | IllegalArgumentException e) {
                     messageStatus = null;
                 }
 
@@ -90,14 +90,14 @@ public class CommunicationInfoBuilder {
                 // If duration cannot be determined, continue.
                 try {
                     duration = Integer.valueOf(jsonObject.get("duration").toString());
-                } catch (ClassCastException | NullPointerException e) {
+                } catch (ClassCastException | NullPointerException | NumberFormatException e) {
                     duration = null;
                 }
 
                 // If status code cannot be determined, continue.
                 try {
                     statusCode = StatusCode.valueOf(jsonObject.get("status_code").toString());
-                } catch (ClassCastException | NullPointerException e) {
+                } catch (ClassCastException | NullPointerException | IllegalArgumentException e) {
                     statusCode = null;
                 }
 

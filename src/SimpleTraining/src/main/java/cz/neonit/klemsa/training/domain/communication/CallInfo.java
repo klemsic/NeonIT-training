@@ -31,6 +31,18 @@ public final class CallInfo extends CommunicationInfo {
     }
 
     /**
+     * Return true if call info is complete. That means no fields is  null.
+     * @return true if call info is complete, else false.
+     */
+    @Override
+    public boolean isRecordComplete() {
+        return super.isRecordComplete()
+                && duration == null
+                && statusCode == null
+                && statusDescription == null;
+    }
+
+    /**
      *
      * @return call duration
      */

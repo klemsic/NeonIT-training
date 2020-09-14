@@ -13,7 +13,7 @@ import java.util.*;
  * @author tomasklemsa
  */
 public final class LogFileMessageInfoLoader implements MessageInfoLoader {
-    private static final String FILE_NAME_PATTERN = "MCP_{0}.json";
+    private static final String FILE_NAME_PATTERN = "MCP_%s.json";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
     private final String logUrl;
 
@@ -34,7 +34,7 @@ public final class LogFileMessageInfoLoader implements MessageInfoLoader {
     public List<CommunicationInfo> getMessagesInfo(Date date) {
         Objects.requireNonNull(date);
         List<CommunicationInfo> result = new ArrayList<>();
-        String fileName = FILE_NAME_PATTERN.replace("{0}",DATE_FORMAT.format(date));
+        String fileName = String.format(FILE_NAME_PATTERN, DATE_FORMAT.format(date));
 
         Path path = Paths.get(logUrl,fileName);
         File file = path.toFile();

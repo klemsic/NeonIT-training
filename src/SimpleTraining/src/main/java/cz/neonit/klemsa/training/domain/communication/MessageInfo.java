@@ -28,6 +28,17 @@ public final class MessageInfo extends CommunicationInfo {
     }
 
     /**
+     * Return true if message info is complete. That means no fields is  null.
+     * @return true if message info is complete, else false.
+     */
+    @Override
+    public boolean isRecordComplete() {
+        return super.isRecordComplete()
+                && messageContent == null
+                && messageStatus == null;
+    }
+
+    /**
      *
      * @return
      */

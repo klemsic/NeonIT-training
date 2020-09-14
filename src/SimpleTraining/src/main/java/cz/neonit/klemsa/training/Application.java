@@ -12,18 +12,21 @@ import java.util.Properties;
 public class Application {
 private final static Properties properties = new Properties();
 
-    /**
-     *
-     * @param args args
-     */
-    public static void main(String[] args) {
+    static {
         // Load properties file.
         try (InputStream input = new FileInputStream(Application.class.getResource("config.properties").getFile())){
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
+    }
+
+    /**
+     *
+     * @param args args
+     */
+    public static void main(String[] args) {
+
 
         // Run Spring application.
         SpringApplication.run(Application.class, args);

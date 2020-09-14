@@ -28,6 +28,17 @@ public abstract class CommunicationInfo {
     }
 
     /**
+     * Return true if communication info is complete. That means no fields is  null.
+     * @return true if communication info is complete, else false.
+     */
+    public boolean isRecordComplete() {
+        return messageType == null
+                && timestamp == null
+                && origin == null
+                && destination == null;
+    }
+
+    /**
      *
      * @return message type
      */
