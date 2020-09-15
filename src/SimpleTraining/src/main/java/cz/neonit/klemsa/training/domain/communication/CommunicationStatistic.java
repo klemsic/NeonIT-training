@@ -31,4 +31,31 @@ public final class CommunicationStatistic {
         this.wordOccurrence = wordOccurrence;
     }
 
+    public Integer getIncompleteRows() {
+        return incompleteRows;
+    }
+
+    public Integer getEmptyMessages() {
+        return emptyMessages;
+    }
+
+    public Integer getErrors() {
+        return errors;
+    }
+
+    public Map<CommunicationCountryDirection, Integer> getCalls() {
+        return calls;
+    }
+
+    public Map<CommunicationCountryDirection, Double> getAverageCallDurations() {
+        return averageCallDurations;
+    }
+
+    public Double getFailtureCallsRatio() {
+        return failtureCallsRatio;
+    }
+
+    public Map<String, Integer> getWordOccurrence() {
+        return wordOccurrence;
+    }
 }
