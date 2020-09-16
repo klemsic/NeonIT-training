@@ -1,8 +1,7 @@
-package cz.neonit.klemsa.training.service.communication;
+package cz.neonit.klemsa.training.service;
 
-import cz.neonit.klemsa.training.dao.communication.MessageInfoLoader;
+import cz.neonit.klemsa.training.dao.MessageInfoLoader;
 import cz.neonit.klemsa.training.domain.communication.*;
-import cz.neonit.klemsa.training.domain.kpi.KpiCounter;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,9 +17,9 @@ public final class CommunicationStatisticService {
      * Calculates simple communication statistic.
      * @return
      */
-    public CommunicationStatistic getCommunicationStatistic(Date date,
+    public CommunicationStatistic getCommunicationStatistic(String date,
                                                             MessageInfoLoader infoLoader,
-                                                            KpiCounter kpiCounter) {
+                                                            KpiCounterService kpiCounterService) {
         List<CommunicationInfo> communicationInfo = infoLoader.getMessagesInfo(date);
         AtomicInteger incompleteRows = new AtomicInteger();
         AtomicInteger emptyMessages = new AtomicInteger();
@@ -30,17 +29,17 @@ public final class CommunicationStatisticService {
         Map<CommunicationCountryDirection, SmallCallStat> callsStat = new HashMap<>();
         Map<String, AtomicInteger> wordsCounter = new HashMap<>();
 
-        kpiCounter.incrementFiles();;
+        kpiCounterService.incrementFiles();;
 
         for (CommunicationInfo c: communicationInfo) {
             if (c == null) {
                 // Number of rows with fields errors.
                 errors.incrementAndGet();
-                kpiCounter.incrementRows();
+                kpiCounterService.incrementRows();
 
             } else if (c instanceof MessageInfo) {
                 MessageInfo messageInfo = (MessageInfo) c;
-                kpiCounter.incrementMessages();
+                kpiCounterService.incrementMessages();
 
                 // Number of rows with missing fields.
                 if (!messageInfo.isRecordComplete())
@@ -57,12 +56,12 @@ public final class CommunicationStatisticService {
                     addWordsToCount(wordsCounter, words);
                 }
 
-                kpiCounter.addOriginCountryCode(messageInfo.getOrigin().getCc());
-                kpiCounter.addDestinationCountryCode(messageInfo.getDestination().getCc());
+                kpiCounterService.addOriginCountryCode(messageInfo.getOrigin().getCc());
+                kpiCounterService.addDestinationCountryCode(messageInfo.getDestination().getCc());
 
             } else if (c instanceof CallInfo) {
                 CallInfo callInfo = (CallInfo) c;
-                kpiCounter.incrementCalls();
+                kpiCounterService.incrementCalls();
 
                 // Number of rows with missing fields.
                 if (!callInfo.isRecordComplete())
@@ -88,10 +87,10 @@ public final class CommunicationStatisticService {
                     scs.duration.addAndGet(callInfo.getDuration() == null ? 0 : callInfo.getDuration());
                 }
 
-                kpiCounter.addDuration(callInfo.getDuration().longValue());
+                kpiCounterService.addDuration(callInfo.getDuration().longValue());
 
-                kpiCounter.addOriginCountryCode(callInfo.getOrigin().getCc());
-                kpiCounter.addDestinationCountryCode(callInfo.getDestination().getCc());
+                kpiCounterService.addOriginCountryCode(callInfo.getOrigin().getCc());
+                kpiCounterService.addDestinationCountryCode(callInfo.getDestination().getCc());
 
             } else {
                 throw new IllegalStateException("Unexpected class: " + c.getClass());

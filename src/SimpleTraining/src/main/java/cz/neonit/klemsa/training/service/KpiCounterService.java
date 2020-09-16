@@ -1,9 +1,7 @@
-package cz.neonit.klemsa.training.domain.kpi;
+package cz.neonit.klemsa.training.service;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import cz.neonit.klemsa.training.domain.kpi.Kpi;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,9 +12,8 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author tomasklemsa
  */
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-public final class KpiCounter {
+@Service
+public final class KpiCounterService {
     private final AtomicInteger files;
     private final AtomicInteger rows;
     private final AtomicInteger calls;
@@ -28,7 +25,7 @@ public final class KpiCounter {
     /**
      * Creates new instance of KPI counter with zero initialize.
      */
-    public KpiCounter() {
+    public KpiCounterService() {
         this.files = new AtomicInteger();
         this.rows = new AtomicInteger();
         this.calls = new AtomicInteger();
@@ -37,15 +34,6 @@ public final class KpiCounter {
         this.destinationCountryCodes = Collections.synchronizedSet(new HashSet<>());
         this.duration = new AtomicLong();
     }
-
-    /**
-     * Gets thread safe KPI counter.
-     * @return KpiCounter
-     */
-//    @Bean
-//    public static KpiCounter getKpiCounter() {
-//        return new KpiCounter();
-//    }
 
     /**
      *

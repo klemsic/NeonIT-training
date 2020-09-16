@@ -1,4 +1,4 @@
-package cz.neonit.klemsa.training.dao.communication;
+package cz.neonit.klemsa.training.dao;
 
 import cz.neonit.klemsa.training.domain.communication.*;
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;

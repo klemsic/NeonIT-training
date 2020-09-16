@@ -1,4 +1,4 @@
-package cz.neonit.klemsa.training.dao.communication;
+package cz.neonit.klemsa.training.dao;
 
 import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;
 
@@ -15,5 +15,5 @@ public interface MessageInfoLoader {
      * @param date in witch you search for message info.
      * @return List of message info witch available in current date.
      */
-    List<CommunicationInfo> getMessagesInfo(Date date);
+    List<CommunicationInfo> getMessagesInfo(String date);
 }

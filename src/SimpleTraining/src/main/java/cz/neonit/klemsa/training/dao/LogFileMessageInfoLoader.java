@@ -1,4 +1,4 @@
-package cz.neonit.klemsa.training.dao.communication;
+package cz.neonit.klemsa.training.dao;
 
 import cz.neonit.klemsa.training.Application;
 import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;
@@ -14,7 +14,6 @@ import java.util.*;
  */
 public final class LogFileMessageInfoLoader implements MessageInfoLoader {
     private static final String FILE_NAME_PATTERN = "MCP_%s.json";
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
     private final String logUrl;
 
     /**
@@ -31,10 +30,10 @@ public final class LogFileMessageInfoLoader implements MessageInfoLoader {
      * @return
      */
     @Override
-    public List<CommunicationInfo> getMessagesInfo(Date date) {
+    public List<CommunicationInfo> getMessagesInfo(String date) {
         Objects.requireNonNull(date);
         List<CommunicationInfo> result = new ArrayList<>();
-        String fileName = String.format(FILE_NAME_PATTERN, DATE_FORMAT.format(date));
+        String fileName = String.format(FILE_NAME_PATTERN, date);
 
         Path path = Paths.get(logUrl,fileName);
         File file = path.toFile();

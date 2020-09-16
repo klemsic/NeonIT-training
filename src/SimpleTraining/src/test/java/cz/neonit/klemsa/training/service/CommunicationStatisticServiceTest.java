@@ -1,8 +1,7 @@
-package cz.neonit.klemsa.training.service.communication;
+package cz.neonit.klemsa.training.service;
 
-import cz.neonit.klemsa.training.dao.communication.MessageInfoLoader;
+import cz.neonit.klemsa.training.dao.MessageInfoLoader;
 import cz.neonit.klemsa.training.domain.communication.*;
-import cz.neonit.klemsa.training.domain.kpi.KpiCounter;
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,7 +31,7 @@ public class CommunicationStatisticServiceTest {
 
     @BeforeEach
     public void init() throws ParseException {
-        Date date = new SimpleDateFormat("yyyyMMdd").parse("20180131");
+        String  date = "20180131";
         List<CommunicationInfo>  communicationInfoList = new ArrayList<>();
         communicationInfoList.add(new MessageInfo(1517645700L,
                 MSISDN.valueOf("34969000001"),
@@ -45,8 +44,8 @@ public class CommunicationStatisticServiceTest {
 
 
     @Test
-    public void noDataToDate(@Autowired KpiCounter kpiCounter) throws ParseException {
-        Date date = new SimpleDateFormat("yyyyMMdd").parse("20180131");
+    public void noDataToDate(@Autowired KpiCounterService kpiCounterService) throws ParseException {
+        String date = "20180131";
         List<CommunicationInfo>  communicationInfoList = new ArrayList<>();
         communicationInfoList.add(new MessageInfo(1517645700L,
                 MSISDN.valueOf("34969000001"),
@@ -56,7 +55,7 @@ public class CommunicationStatisticServiceTest {
         Mockito.when(messageInfoLoader.getMessagesInfo(date)).thenReturn(communicationInfoList);
 
         CommunicationStatisticService css = new CommunicationStatisticService();
-        CommunicationStatistic cs1 = css.getCommunicationStatistic(date, messageInfoLoader, kpiCounter);
+        CommunicationStatistic cs1 = css.getCommunicationStatistic(date, messageInfoLoader, kpiCounterService);
 
 
         Map<CommunicationCountryDirection,Integer> calls = new HashMap<>();
