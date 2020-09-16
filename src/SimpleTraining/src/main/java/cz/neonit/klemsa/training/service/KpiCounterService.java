@@ -4,7 +4,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,8 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author tomasklemsa
  */
-//@Component
-@Service
+@Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public final class KpiCounter {
     private final AtomicInteger files;
@@ -30,7 +28,7 @@ public final class KpiCounter {
     /**
      * Creates new instance of KPI counter with zero initialize.
      */
-    private KpiCounter() {
+    public KpiCounter() {
         this.files = new AtomicInteger();
         this.rows = new AtomicInteger();
         this.calls = new AtomicInteger();
@@ -44,10 +42,10 @@ public final class KpiCounter {
      * Gets thread safe KPI counter.
      * @return KpiCounter
      */
-    @Bean
-    public static KpiCounter getKpiCounter() {
-        return new KpiCounter();
-    }
+//    @Bean
+//    public static KpiCounter getKpiCounter() {
+//        return new KpiCounter();
+//    }
 
     /**
      *
