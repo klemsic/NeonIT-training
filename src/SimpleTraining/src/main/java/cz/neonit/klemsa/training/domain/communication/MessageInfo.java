@@ -34,8 +34,8 @@ public final class MessageInfo extends CommunicationInfo {
     @Override
     public boolean isRecordComplete() {
         return super.isRecordComplete()
-                && messageContent == null
-                && messageStatus == null;
+                && messageContent != null
+                && messageStatus != null;
     }
 
     /**

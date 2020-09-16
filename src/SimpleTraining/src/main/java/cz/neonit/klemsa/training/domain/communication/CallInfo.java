@@ -37,9 +37,9 @@ public final class CallInfo extends CommunicationInfo {
     @Override
     public boolean isRecordComplete() {
         return super.isRecordComplete()
-                && duration == null
-                && statusCode == null
-                && statusDescription == null;
+                && duration != null
+                && statusCode != null
+                && statusDescription != null;
     }
 
     /**

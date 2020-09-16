@@ -32,7 +32,6 @@ private final static Properties properties = new Properties();
         SpringApplication.run(Application.class, args);
     }
 
-
     /**
      *
      * @return Application properties.

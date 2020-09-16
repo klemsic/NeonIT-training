@@ -58,4 +58,13 @@ public final class CommunicationCountryDirection {
     public int hashCode() {
         return Objects.hash(originCc, destinationCc);
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return originCc + "-" + destinationCc;
+    }
 }

@@ -8,10 +8,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author tomasklemsa
+ */
 public final class CommunicationStatisticService {
 
     /**
-     *
+     * Calculates simple communication statistic.
      * @return
      */
     public CommunicationStatistic getCommunicationStatistic(Date date, MessageInfoLoader infoLoader) {
@@ -98,7 +101,7 @@ public final class CommunicationStatisticService {
                 errors.intValue(),
                 calls,
                 averageDurations,
-                okCalls.doubleValue() / koCalls.doubleValue(),
+                koCalls.doubleValue() / koCalls.doubleValue() + okCalls.doubleValue(),
                 wordOccurrence);
     }
 

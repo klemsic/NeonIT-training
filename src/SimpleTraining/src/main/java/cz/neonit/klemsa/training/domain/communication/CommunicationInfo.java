@@ -32,10 +32,10 @@ public abstract class CommunicationInfo {
      * @return true if communication info is complete, else false.
      */
     public boolean isRecordComplete() {
-        return messageType == null
-                && timestamp == null
-                && origin == null
-                && destination == null;
+        return messageType != null
+                && timestamp != null
+                && origin != null
+                && destination != null;
     }
 
     /**
