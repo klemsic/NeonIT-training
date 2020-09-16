@@ -7,15 +7,15 @@ import java.util.Objects;
  * @author tomasklemsa
  */
 public final class CommunicationCountryDirection {
-    public final int originCc;
-    public final int destinationCc;
+    public final Integer originCc;
+    public final Integer destinationCc;
 
     /**
      *
      * @param originCc
      * @param destinationCc
      */
-    public CommunicationCountryDirection(int originCc, int destinationCc) {
+    public CommunicationCountryDirection(Integer originCc, Integer destinationCc) {
         this.originCc = originCc;
         this.destinationCc = destinationCc;
     }
@@ -24,7 +24,7 @@ public final class CommunicationCountryDirection {
      *
      * @return
      */
-    public int getOriginCc() {
+    public Integer getOriginCc() {
         return originCc;
     }
 
@@ -32,7 +32,7 @@ public final class CommunicationCountryDirection {
      *
      * @return
      */
-    public int getDestinationCc() {
+    public Integer getDestinationCc() {
         return destinationCc;
     }
 
@@ -65,6 +65,8 @@ public final class CommunicationCountryDirection {
      */
     @Override
     public String toString() {
-        return originCc + "-" + destinationCc;
+        return originCc == null ? "" : originCc.toString()
+                + "-" +
+                destinationCc == null ? "" : destinationCc.toString();
     }
 }

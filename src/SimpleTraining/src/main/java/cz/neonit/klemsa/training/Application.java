@@ -14,7 +14,7 @@ private final static Properties properties = new Properties();
 
     static {
         // Load properties file.
-        try (InputStream input = new FileInputStream(Application.class.getResource("config.properties").getFile())){
+        try (InputStream input = new FileInputStream(Application.class.getClassLoader().getResource("config.properties").getFile())){
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();

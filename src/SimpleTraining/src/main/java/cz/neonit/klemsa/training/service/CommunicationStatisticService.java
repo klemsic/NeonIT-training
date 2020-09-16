@@ -56,8 +56,11 @@ public final class CommunicationStatisticService {
                     addWordsToCount(wordsCounter, words);
                 }
 
-                kpiCounterService.addOriginCountryCode(messageInfo.getOrigin().getCc());
-                kpiCounterService.addDestinationCountryCode(messageInfo.getDestination().getCc());
+                if (messageInfo.getOrigin() != null)
+                    kpiCounterService.addOriginCountryCode(messageInfo.getOrigin().getCc());
+
+                if (messageInfo.getDestination() != null)
+                    kpiCounterService.addDestinationCountryCode(messageInfo.getDestination().getCc());
 
             } else if (c instanceof CallInfo) {
                 CallInfo callInfo = (CallInfo) c;
@@ -87,10 +90,14 @@ public final class CommunicationStatisticService {
                     scs.duration.addAndGet(callInfo.getDuration() == null ? 0 : callInfo.getDuration());
                 }
 
-                kpiCounterService.addDuration(callInfo.getDuration().longValue());
+                if (callInfo.getDuration() != null)
+                    kpiCounterService.addDuration(callInfo.getDuration().longValue());
 
-                kpiCounterService.addOriginCountryCode(callInfo.getOrigin().getCc());
-                kpiCounterService.addDestinationCountryCode(callInfo.getDestination().getCc());
+                if (callInfo.getOrigin() != null)
+                    kpiCounterService.addOriginCountryCode(callInfo.getOrigin().getCc());
+
+               if (callInfo.getDestination() != null)
+                   kpiCounterService.addDestinationCountryCode(callInfo.getDestination().getCc());
 
             } else {
                 throw new IllegalStateException("Unexpected class: " + c.getClass());
