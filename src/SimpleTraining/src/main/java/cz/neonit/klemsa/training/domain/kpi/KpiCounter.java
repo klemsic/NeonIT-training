@@ -3,6 +3,8 @@ package cz.neonit.klemsa.training.domain.kpi;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,7 +15,10 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author tomasklemsa
  */
-public class KpiCouner {
+//@Component
+@Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+public final class KpiCounter {
     private final AtomicInteger files;
     private final AtomicInteger rows;
     private final AtomicInteger calls;
@@ -25,7 +30,7 @@ public class KpiCouner {
     /**
      * Creates new instance of KPI counter with zero initialize.
      */
-    private KpiCouner() {
+    private KpiCounter() {
         this.files = new AtomicInteger();
         this.rows = new AtomicInteger();
         this.calls = new AtomicInteger();
@@ -40,9 +45,8 @@ public class KpiCouner {
      * @return KpiCounter
      */
     @Bean
-    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public KpiCouner kpiCounter() {
-        return new KpiCouner();
+    public static KpiCounter getKpiCounter() {
+        return new KpiCounter();
     }
 
     /**
@@ -57,5 +61,62 @@ public class KpiCouner {
                 originCountryCodes.size(),
                 destinationCountryCodes.size(),
                 duration.longValue());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer incrementFiles() {
+        return files.incrementAndGet();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer incrementRows() {
+        return rows.incrementAndGet();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer incrementCalls() {
+        return calls.incrementAndGet();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer incrementMessages() {
+        return messages.incrementAndGet();
+    }
+
+    /**
+     *
+     * @param cc country code
+     */
+    public void addOriginCountryCode(Integer cc) {
+        originCountryCodes.add(cc);
+    }
+
+    /**
+     *
+     * @param cc country code
+     */
+    public void addDestinationCountryCode(Integer cc) {
+        destinationCountryCodes.add(cc);
+    }
+
+    /**
+     *
+     * @param duration
+     * @return
+     */
+    public Long addDuration(Long duration) {
+        return this.duration.addAndGet(duration);
     }
 }

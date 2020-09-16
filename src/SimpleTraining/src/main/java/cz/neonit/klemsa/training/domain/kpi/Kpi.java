@@ -3,7 +3,7 @@ package cz.neonit.klemsa.training.domain.kpi;
 /**
  * @author tomasklemsa
  */
-public class Kpi {
+public final class Kpi {
     private final Integer files;
     private final Integer rows;
     private final Integer calls;

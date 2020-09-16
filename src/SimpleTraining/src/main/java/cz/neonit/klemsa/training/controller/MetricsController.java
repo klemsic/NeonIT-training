@@ -2,7 +2,9 @@ package cz.neonit.klemsa.training.controller;
 
 import cz.neonit.klemsa.training.dao.communication.LogFileMessageInfoLoader;
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
+import cz.neonit.klemsa.training.domain.kpi.KpiCounter;
 import cz.neonit.klemsa.training.service.communication.CommunicationStatisticService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,8 @@ import java.util.Date;
 public class MetricsController {
 
     @GetMapping("/metrics")
-    public ResponseEntity<CommunicationStatistic> metrics(@RequestParam(value = "date", defaultValue = "today") String date) {
+    public ResponseEntity<CommunicationStatistic> metrics(@RequestParam(value = "date", defaultValue = "today") String date,
+                                                          @Autowired KpiCounter kpiCounter) {
         Date dt = new Date();
         try {
             dt = new SimpleDateFormat("yyyyMMdd").parse(date);
@@ -26,7 +29,9 @@ public class MetricsController {
         }
 
         CommunicationStatisticService service = new CommunicationStatisticService();
-        CommunicationStatistic communicationStatistic = service.getCommunicationStatistic(dt, new LogFileMessageInfoLoader());
+        CommunicationStatistic communicationStatistic = service.getCommunicationStatistic(dt,
+                new LogFileMessageInfoLoader(),
+                kpiCounter);
 
         return new ResponseEntity<>(communicationStatistic, HttpStatus.OK);
     }
