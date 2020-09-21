@@ -43,7 +43,7 @@ public final class LogFileMessageInfoLoader implements MessageInfoLoader {
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
-                result.add(CommunicationInfoBuilder.buildFromJson(line));
+                result.add(CommunicationInfoParser.parse(line));
             }
 
         } catch(IOException e) {
