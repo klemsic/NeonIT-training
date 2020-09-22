@@ -1,5 +1,6 @@
 package cz.neonit.klemsa.training.controller;
 
+import cz.neonit.klemsa.training.dao.GitHubMessageInfoLoader;
 import cz.neonit.klemsa.training.dao.LogFileMessageInfoLoader;
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
 import cz.neonit.klemsa.training.service.KpiCounterService;
@@ -29,7 +30,7 @@ public class MetricsController {
 
         CommunicationStatisticService service = new CommunicationStatisticService();
         CommunicationStatistic communicationStatistic = service.getCommunicationStatistic(date,
-                new LogFileMessageInfoLoader(),
+                new GitHubMessageInfoLoader(),
                 kpiCounterService);
 
         return new ResponseEntity<>(communicationStatistic, HttpStatus.OK);
