@@ -17,9 +17,7 @@ public final class CommunicationStatisticService {
      * Calculates simple communication statistic.
      * @return
      */
-    public CommunicationStatistic getCommunicationStatistic(String date,
-                                                            MessageInfoLoader infoLoader,
-                                                            KpiCounterService kpiCounterService) {
+    public CommunicationStatistic getCommunicationStatistic(String date, MessageInfoLoader infoLoader) {
         List<CommunicationInfo> communicationInfo = infoLoader.getMessagesInfo(date);
         AtomicInteger incompleteRows = new AtomicInteger();
         AtomicInteger emptyMessages = new AtomicInteger();
@@ -29,17 +27,17 @@ public final class CommunicationStatisticService {
         Map<CommunicationCountryDirection, SmallCallStat> callsStat = new HashMap<>();
         Map<String, AtomicInteger> wordsCounter = new HashMap<>();
 
-        kpiCounterService.incrementFiles();;
+//        kpiCounterService.incrementFiles();
 
         for (CommunicationInfo c: communicationInfo) {
             if (c == null) {
                 // Number of rows with fields errors.
                 errors.incrementAndGet();
-                kpiCounterService.incrementRows();
+//                kpiCounterService.incrementRows();
 
             } else if (c instanceof MessageInfo) {
                 MessageInfo messageInfo = (MessageInfo) c;
-                kpiCounterService.incrementMessages();
+//                kpiCounterService.incrementMessages();
 
                 // Number of rows with missing fields.
                 if (!messageInfo.isRecordComplete())
@@ -56,15 +54,15 @@ public final class CommunicationStatisticService {
                     addWordsToCount(wordsCounter, words);
                 }
 
-                if (messageInfo.getOrigin() != null)
-                    kpiCounterService.addOriginCountryCode(messageInfo.getOrigin().getCc());
-
-                if (messageInfo.getDestination() != null)
-                    kpiCounterService.addDestinationCountryCode(messageInfo.getDestination().getCc());
+//                if (messageInfo.getOrigin() != null)
+//                    kpiCounterService.addOriginCountryCode(messageInfo.getOrigin().getCc());
+//
+//                if (messageInfo.getDestination() != null)
+//                    kpiCounterService.addDestinationCountryCode(messageInfo.getDestination().getCc());
 
             } else if (c instanceof CallInfo) {
                 CallInfo callInfo = (CallInfo) c;
-                kpiCounterService.incrementCalls();
+//                kpiCounterService.incrementCalls();
 
                 // Number of rows with missing fields.
                 if (!callInfo.isRecordComplete())
@@ -90,14 +88,14 @@ public final class CommunicationStatisticService {
                     scs.duration.addAndGet(callInfo.getDuration() == null ? 0 : callInfo.getDuration());
                 }
 
-                if (callInfo.getDuration() != null)
-                    kpiCounterService.addDuration(callInfo.getDuration().longValue());
-
-                if (callInfo.getOrigin() != null)
-                    kpiCounterService.addOriginCountryCode(callInfo.getOrigin().getCc());
-
-               if (callInfo.getDestination() != null)
-                   kpiCounterService.addDestinationCountryCode(callInfo.getDestination().getCc());
+//                if (callInfo.getDuration() != null)
+//                    kpiCounterService.addDuration(callInfo.getDuration().longValue());
+//
+//                if (callInfo.getOrigin() != null)
+//                    kpiCounterService.addOriginCountryCode(callInfo.getOrigin().getCc());
+//
+//               if (callInfo.getDestination() != null)
+//                   kpiCounterService.addDestinationCountryCode(callInfo.getDestination().getCc());
 
             } else {
                 throw new IllegalStateException("Unexpected class: " + c.getClass());

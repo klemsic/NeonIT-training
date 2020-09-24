@@ -1,5 +1,9 @@
 package cz.neonit.klemsa.training.domain.communication;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.Objects;
 
 /**
@@ -7,15 +11,17 @@ import java.util.Objects;
  * @author tomasklemsa
  */
 public final class CommunicationCountryDirection {
-    public final Integer originCc;
-    public final Integer destinationCc;
+    public Integer originCc;
+    public Integer destinationCc;
 
     /**
      *
      * @param originCc
      * @param destinationCc
      */
-    public CommunicationCountryDirection(Integer originCc, Integer destinationCc) {
+    @JsonCreator
+    public CommunicationCountryDirection(@JsonProperty("originCc") Integer originCc,
+                                         @JsonProperty("destinationCc") Integer destinationCc) {
         this.originCc = originCc;
         this.destinationCc = destinationCc;
     }
@@ -24,6 +30,7 @@ public final class CommunicationCountryDirection {
      *
      * @return
      */
+    @JsonGetter
     public Integer getOriginCc() {
         return originCc;
     }
@@ -32,6 +39,7 @@ public final class CommunicationCountryDirection {
      *
      * @return
      */
+    @JsonGetter
     public Integer getDestinationCc() {
         return destinationCc;
     }
@@ -46,8 +54,8 @@ public final class CommunicationCountryDirection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommunicationCountryDirection that = (CommunicationCountryDirection) o;
-        return originCc == that.originCc &&
-                destinationCc == that.destinationCc;
+        return Objects.equals(originCc, that.originCc) &&
+                Objects.equals(destinationCc, that.destinationCc);
     }
 
     /**
@@ -59,14 +67,40 @@ public final class CommunicationCountryDirection {
         return Objects.hash(originCc, destinationCc);
     }
 
-    /**
-     *
-     * @return
-     */
+    @JsonValue
     @Override
     public String toString() {
-        return originCc == null ? "" : originCc.toString()
-                + "-" +
-                destinationCc == null ? "" : destinationCc.toString();
+        ObjectMapper mapper = new ObjectMapper();
+        return (originCc == null ? "" : originCc)
+                + "-"
+                + (destinationCc == null ? "" : destinationCc);
     }
+
+    /**
+     *
+     * @param s
+     * @return
+     */
+    public static CommunicationCountryDirection valueOf(String s) {
+        Objects.requireNonNull(s);
+        Integer originCc = null;
+        Integer destinationCc = null;
+
+        if (s.contains("-")) {
+            String[] values = s.split("-");
+            if (values.length == 1) {
+                originCc = values[0].equals("") ? null : Integer.valueOf(values[0]);
+            } else if (values.length == 2) {
+                originCc = values[0].equals("") ? null : Integer.valueOf(values[0]);
+                destinationCc = values[1].equals("") ? null : Integer.valueOf(values[1]);
+            } else {
+                throw new NumberFormatException("Illegal format of CommunicationCountryDirection: " + s);
+            }
+        } else {
+            throw new NumberFormatException("Illegal format of CommunicationCountryDirection: " + s);
+        }
+        return new CommunicationCountryDirection(originCc,destinationCc);
+    }
+
+
 }

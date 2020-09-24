@@ -3,9 +3,10 @@ package cz.neonit.klemsa.training.service;
 import cz.neonit.klemsa.training.dao.MessageInfoLoader;
 import cz.neonit.klemsa.training.domain.communication.*;
 import cz.neonit.klemsa.training.domain.msisdn.MSISDN;
+
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
@@ -43,6 +44,7 @@ public class CommunicationStatisticServiceTest {
 
 
 
+    /*
     @Test
     public void noDataToDate(@Autowired KpiCounterService kpiCounterService) throws ParseException {
         String date = "20180131";
@@ -78,8 +80,7 @@ public class CommunicationStatisticServiceTest {
 
         // assertEquals(cs1, cs2);
     }
-
-
+*/
 
 
 
