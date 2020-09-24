@@ -1,15 +1,11 @@
 package cz.neonit.klemsa.training.service;
 
-import cz.neonit.klemsa.training.domain.communication.CommunicationCountryDirection;
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatisticSerializer;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.LongSerializer;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
 public final class MetricsCallKafkaProducer  {
     private final static String TOPIC = "METRICS_CALL";

@@ -1,6 +1,5 @@
 package cz.neonit.klemsa.training.domain.communication;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,13 +10,13 @@ import java.util.Map;
  * @author tomasklemsa
  */
 public final class CommunicationStatistic {
-    private Integer incompleteRows;
-    private Integer emptyMessages;
-    private Integer errors;
-    private Map<CommunicationCountryDirection,Integer> calls;
-    private Map<CommunicationCountryDirection,Double> averageCallDurations;
-    private Double failtureCallsRatio;
-    private Map<String, Integer> wordOccurrence;
+    private final Integer incompleteRows;
+    private final Integer emptyMessages;
+    private final Integer errors;
+    private final  Map<CommunicationCountryDirection,Integer> calls;
+    private final Map<CommunicationCountryDirection,Double> averageCallDurations;
+    private final Double failtureCallsRatio;
+    private final Map<String, Integer> wordOccurrence;
 
     /**
      *

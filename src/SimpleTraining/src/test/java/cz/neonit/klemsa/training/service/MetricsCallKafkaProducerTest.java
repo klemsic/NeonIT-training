@@ -11,15 +11,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MetricsCallKafkaProducerTest {
-//    @Test
-//    public void producerCall() throws IOException, ClassNotFoundException {
-//        MetricsCallKafkaProducer producer = new MetricsCallKafkaProducer();
-//        producer.send();
-//
-//        CommunicationCountryDirection direction = new CommunicationCountryDirection(420,421);
-//        Map<CommunicationCountryDirection, Integer> map = new HashMap<>();
-//        map.put(direction, 125);
-//    }
+    @Test
+    public void producerCall() throws IOException, ClassNotFoundException {
+        MetricsCallKafkaProducer producer = new MetricsCallKafkaProducer();
+
+        Map<CommunicationCountryDirection, Integer> calls = new HashMap<>();
+        Map<CommunicationCountryDirection, Double> duration = new HashMap<>();
+        Map<String, Integer> words = new HashMap<>();
+
+        calls.put(new CommunicationCountryDirection(420,420), 628);
+        calls.put(new CommunicationCountryDirection(420,421), 129);
+        calls.put(new CommunicationCountryDirection(421,421), 427);
+        calls.put(new CommunicationCountryDirection(421,420), 86);
+
+
+        CommunicationStatistic cs = new CommunicationStatistic(10,
+                2,
+                1,
+                calls,
+                duration,
+                0.9853,
+                words);
+
+        producer.send(cs);
+
+        CommunicationCountryDirection direction = new CommunicationCountryDirection(420,421);
+        Map<CommunicationCountryDirection, Integer> map = new HashMap<>();
+        map.put(direction, 125);
+    }
 
     @Test
     public void deserializertest() {

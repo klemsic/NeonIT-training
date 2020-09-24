@@ -81,6 +81,7 @@ public final class CommunicationCountryDirection {
      * @param s
      * @return
      */
+    @JsonCreator
     public static CommunicationCountryDirection valueOf(String s) {
         Objects.requireNonNull(s);
         Integer originCc = null;
