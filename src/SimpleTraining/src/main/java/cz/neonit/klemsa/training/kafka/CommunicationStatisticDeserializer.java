@@ -1,11 +1,14 @@
-package cz.neonit.klemsa.training.domain.communication;
+package cz.neonit.klemsa.training.kafka;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
 import org.apache.kafka.common.serialization.Deserializer;
+import org.springframework.stereotype.Component;
 
 /**
  * @author tomasklemsa
  */
+@Component
 public class CommunicationStatisticDeserializer implements Deserializer<CommunicationStatistic> {
 
     /**

@@ -1,9 +1,9 @@
 package cz.neonit.klemsa.training.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.neonit.klemsa.training.domain.communication.CommunicationCountryDirection;
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
-import cz.neonit.klemsa.training.domain.communication.CommunicationStatisticDeserializer;
+import cz.neonit.klemsa.training.kafka.CommunicationStatisticDeserializer;
+import cz.neonit.klemsa.training.kafka.MetricsCallKafkaProducer;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MetricsCallKafkaProducerTest {
-    @Test
+
+    /*@Test
     public void producerCall() throws IOException, ClassNotFoundException {
         MetricsCallKafkaProducer producer = new MetricsCallKafkaProducer();
 
@@ -23,7 +24,6 @@ public class MetricsCallKafkaProducerTest {
         calls.put(new CommunicationCountryDirection(420,421), 129);
         calls.put(new CommunicationCountryDirection(421,421), 427);
         calls.put(new CommunicationCountryDirection(421,420), 86);
-
 
         CommunicationStatistic cs = new CommunicationStatistic(10,
                 2,
@@ -39,6 +39,7 @@ public class MetricsCallKafkaProducerTest {
         Map<CommunicationCountryDirection, Integer> map = new HashMap<>();
         map.put(direction, 125);
     }
+     */
 
     @Test
     public void deserializertest() {

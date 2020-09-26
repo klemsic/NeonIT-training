@@ -1,12 +1,13 @@
-package cz.neonit.klemsa.training.service;
+package cz.neonit.klemsa.training.kafka;
 
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
-import cz.neonit.klemsa.training.domain.communication.CommunicationStatisticSerializer;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.LongSerializer;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+@Component
 public final class MetricsCallKafkaProducer  {
     private final static String TOPIC = "METRICS_CALL";
     private final static String BOOTSTRAP_SERVERS = "localhost:9092";

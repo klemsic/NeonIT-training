@@ -1,11 +1,10 @@
 package cz.neonit.klemsa.training.service;
 
+import cz.neonit.klemsa.training.domain.communication.*;
 import cz.neonit.klemsa.training.domain.kpi.Kpi;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -51,58 +50,24 @@ public final class KpiCounterService {
 
     /**
      *
-     * @return
+     * @param communicationStatistic
      */
-    public Integer incrementFiles() {
-        return files.incrementAndGet();
-    }
+    public void addCommunicationStatistic(CommunicationStatistic communicationStatistic) {
+        this.files.incrementAndGet();
+        this.rows.addAndGet(communicationStatistic.getRows());
 
-    /**
-     *
-     * @return
-     */
-    public Integer incrementRows() {
-        return rows.incrementAndGet();
-    }
+        // Total calls & country codes.
+        communicationStatistic.getCalls().forEach((k, v) -> {
+            this.calls.addAndGet(v);
+            this.originCountryCodes.add(k.originCc);
+            this.destinationCountryCodes.add(k.destinationCc);
+        });
 
-    /**
-     *
-     * @return
-     */
-    public Integer incrementCalls() {
-        return calls.incrementAndGet();
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer incrementMessages() {
-        return messages.incrementAndGet();
-    }
-
-    /**
-     *
-     * @param cc country code
-     */
-    public void addOriginCountryCode(Integer cc) {
-        originCountryCodes.add(cc);
-    }
-
-    /**
-     *
-     * @param cc country code
-     */
-    public void addDestinationCountryCode(Integer cc) {
-        destinationCountryCodes.add(cc);
-    }
-
-    /**
-     *
-     * @param duration
-     * @return
-     */
-    public Long addDuration(Long duration) {
-        return this.duration.addAndGet(duration);
+        // Total messages & country codes.
+        communicationStatistic.getMessages().forEach((k, v) -> {
+            this.messages.addAndGet(v);
+            this.originCountryCodes.add(k.originCc);
+            this.destinationCountryCodes.add(k.destinationCc);
+        });
     }
 }
