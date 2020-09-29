@@ -2,6 +2,8 @@ package cz.neonit.klemsa.training.dao;
 
 import cz.neonit.klemsa.training.Application;
 import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.URL;
@@ -10,6 +12,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * @author tomasklemsa
+ */
+@Component("GitHubMessageInfoLoader")
 public class GitHubMessageInfoLoader implements MessageInfoLoader {
     private static final String FILE_NAME_PATTERN = "MCP_%s.json";
     private final String logUrl;

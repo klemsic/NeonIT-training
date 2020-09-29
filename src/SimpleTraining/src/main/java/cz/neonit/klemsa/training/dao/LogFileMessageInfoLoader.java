@@ -2,6 +2,7 @@ package cz.neonit.klemsa.training.dao;
 
 import cz.neonit.klemsa.training.Application;
 import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -12,6 +13,7 @@ import java.util.*;
 /**
  * @author tomasklemsa
  */
+@Component("LogFileMessageInfoLoader")
 public final class LogFileMessageInfoLoader implements MessageInfoLoader {
     private static final String FILE_NAME_PATTERN = "MCP_%s.json";
     private final String logUrl;

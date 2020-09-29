@@ -1,6 +1,7 @@
 package cz.neonit.klemsa.training.dao;
 
 import cz.neonit.klemsa.training.domain.communication.CommunicationInfo;
+import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
 import java.util.Date;

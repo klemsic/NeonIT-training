@@ -1,10 +1,12 @@
 package cz.neonit.klemsa.training.controller;
 
 import cz.neonit.klemsa.training.dao.GitHubMessageInfoLoader;
+import cz.neonit.klemsa.training.dao.MessageInfoLoader;
 import cz.neonit.klemsa.training.domain.communication.CommunicationStatistic;
 import cz.neonit.klemsa.training.service.CommunicationStatisticService;
 import cz.neonit.klemsa.training.kafka.MetricsCallKafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ public class MetricsController {
 
     private final CommunicationStatisticService communicationStatisticService;
     private final MetricsCallKafkaProducer metricsCallKafkaProducer;
+    private final MessageInfoLoader messageInfoLoader;
 
     /**
      *
@@ -24,9 +27,11 @@ public class MetricsController {
      */
     @Autowired
     public MetricsController(CommunicationStatisticService communicationStatisticService,
-                             MetricsCallKafkaProducer metricsCallKafkaProducer) {
+                             MetricsCallKafkaProducer metricsCallKafkaProducer,
+                             @Qualifier("GitHubMessageInfoLoader") MessageInfoLoader messageInfoLoader) {
         this.communicationStatisticService = communicationStatisticService;
         this.metricsCallKafkaProducer = metricsCallKafkaProducer;
+        this.messageInfoLoader = messageInfoLoader;
     }
 
     /**
@@ -37,7 +42,7 @@ public class MetricsController {
     @GetMapping("/metrics")
     public ResponseEntity<CommunicationStatistic> metrics(@RequestParam(value = "date", defaultValue = "today") String date) {
 
-        CommunicationStatistic communicationStatistic = communicationStatisticService.getCommunicationStatistic(date, new GitHubMessageInfoLoader());
+        CommunicationStatistic communicationStatistic = communicationStatisticService.getCommunicationStatistic(date, messageInfoLoader);
 
         // Send via Kafka to KPIs.
         metricsCallKafkaProducer.send(communicationStatistic);
